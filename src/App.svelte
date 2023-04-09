@@ -7,6 +7,7 @@
   import Footer from './lib/Footer.svelte'
   import Home from './lib/Home.svelte'
   import Chat from './lib/Chat.svelte'
+  import Start from './lib/Start.svelte'
   import NewChat from './lib/NewChat.svelte'
   import { chatsStorage, apiKeyStorage } from './lib/Storage.svelte'
 
@@ -27,6 +28,8 @@
         return !!$apiKeyStorage
       }
     }),
+
+    '/chat/start': Start,
 
     '/chat/:chatId': wrap({
       component: Chat,
