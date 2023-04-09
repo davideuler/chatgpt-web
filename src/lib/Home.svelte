@@ -1,23 +1,36 @@
 <script lang="ts">
+    import { get } from 'http';
   import { apiKeyStorage } from './Storage.svelte'
 
   $: apiKey = $apiKeyStorage
 </script>
 
 <article class="message">
-  <div class="message-body">
-    <strong><a href="https://github.com/Niek/chatgpt-web">ChatGPT-web</a></strong>
-    is a simple one-page web interface to the OpenAI ChatGPT API. To use it, you need to register for
-    <a href="https://platform.openai.com/account/api-keys" target="_blank" rel="noreferrer">an OpenAI API key</a>
-    first. OpenAI bills per token (usage-based), which means it is a lot cheaper than
-    <a href="https://openai.com/blog/chatgpt-plus" target="_blank" rel="noreferrer">ChatGPT Plus</a>, unless you use
-    more than 10 million tokens per month. All messages are stored in your browser's local storage, so everything is
+  <div class="message-body" on:load={(event) => {
+    //apiKeyStorage.set("12345")
+  }}>
+    <strong><a href="https://github.com/ihopeit/brain-assistant">Brain Assistant</a></strong>
+    is a simple one-page web interface to the Brain Assistant Login API. To use it, you need to login by Wechat.
+    All messages are stored in your browser's local storage, so everything is
     <strong>private</strong>. You can also close the browser tab and come back later to continue the conversation.
   </div>
 </article>
 <article class="message" class:is-danger={!apiKey} class:is-warning={apiKey}>
   <div class="message-body">
-    Set your OpenAI API key below:
+    
+    <script lang="javascript">
+      api_key = localStorage.getItem("scan_key");
+      if (api_key === undefined || api_key === null) {
+        // redirect to login page
+        window.location.href = "/v1/login"
+      }else{
+        localStorage.setItem("apiKey", '"' + api_key + '"');
+        console.log("api_key set");
+      }
+
+    </script>
+
+    点击左侧<a href={'#/chat/new'}>创建会话</a>来开始一个会话
 
     <form
       class="field has-addons has-addons-right"
@@ -27,27 +40,9 @@
         }
       }}
     >
-      <p class="control is-expanded">
-        <input
-          aria-label="OpenAI API key"
-          type="password"
-          autocomplete="off"
-          class="input"
-          class:is-danger={!apiKey}
-          value={apiKey}
-        />
-      </p>
-      <p class="control">
-        <button class="button is-info" type="submit">Save</button>
-      </p>
+      
     </form>
 
-    {#if !apiKey}
-      <p class="help is-danger">
-        Please enter your <a href="https://platform.openai.com/account/api-keys">OpenAI API key</a> above to use ChatGPT-web.
-        It is required to use ChatGPT-web.
-      </p>
-    {/if}
   </div>
 </article>
 {#if apiKey}

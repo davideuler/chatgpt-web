@@ -30,7 +30,7 @@
 </script>
 
 <aside class="menu">
-  <p class="menu-label">Chats</p>
+  <p class="menu-label">会话</p>
   <ul class="menu-list">
     {#if sortedChats.length === 0}
       <li><a href={'#'} class="is-disabled">No chats yet...</a></li>
@@ -49,16 +49,16 @@
       </li>
     {/if}
   </ul>
-  <p class="menu-label">Actions</p>
+  <p class="menu-label">菜单</p>
   <ul class="menu-list">
     <li>
-      <a href={'#/'} class="panel-block" class:is-disabled={!$apiKeyStorage} class:is-active={!activeChatId}
-        ><span class="greyscale mr-2">🔑</span> API key</a
+      <a href={'#/'} class="panel-block"  class:is-active={!activeChatId}
+        ><span class="greyscale mr-2">🔑</span> 介绍</a
       >
     </li>
     <li>
-      <a href={'#/chat/new'} class="panel-block" class:is-disabled={!$apiKeyStorage}
-        ><span class="greyscale mr-2">➕</span> New chat</a
+      <a href={'#/chat/new'} class="panel-block"
+        ><span class="greyscale mr-2">➕</span> 创建会话</a
       >
     </li>
     <li>
@@ -70,7 +70,7 @@
           if (confirmDelete) {
             replace('#/').then(() => clearChats())
           }
-        }}><span class="greyscale mr-2">🗑️</span> Clear chats</a
+        }}><span class="greyscale mr-2">🗑️</span> 清理会话</a
       >
     </li>
     {#if activeChatId}
@@ -83,7 +83,7 @@
             if (activeChatId) {
               exportAsMarkdown(activeChatId)
             }
-          }}><span class="greyscale mr-2">📥</span> Export chat</a
+          }}><span class="greyscale mr-2">📥</span> 导出会话 </a
         >
       </li>
     {/if}

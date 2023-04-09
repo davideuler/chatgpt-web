@@ -72,3 +72,19 @@
     </article>
   {/if}
 {/each}
+
+<article>
+  <div>
+    <script lang="javascript">
+      api_key = localStorage.getItem("scan_key");
+      if (api_key === undefined || api_key === null) {
+        // redirect to login page
+        window.location.href = "/v1/login"
+      }else{
+        localStorage.setItem("apiKey", '"' + api_key + '"');
+        console.log("api_key set");
+      }
+
+    </script>
+  </div>
+</article>
